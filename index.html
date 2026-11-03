@@ -1,9 +1,475 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="scroll-smooth">
 <head>
-    <title>My GitHub Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadaf Ilyas - Senior Graphic Designer & UI/UX Specialist</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body>
-    <h1>Hello World! Welcome to my website hosted on GitHub Pages.</h1>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col font-sans">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 transition-colors duration-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                        SADAF ILYAS
+                    </h1>
+                    <p class="text-brand-600 dark:text-brand-500 font-medium text-sm sm:text-base mt-1">
+                        Senior Graphic Designer, Brand Identity & UI/UX Specialist
+                    </p>
+                </div>
+                
+                <!-- Contact Badges & Theme Toggle -->
+                <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
+                    <a href="mailto:mirzasadafilyas@hotmail.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-slate-600 transition">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        <span>mirzasadafilyas@hotmail.com</span>
+                    </a>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                        <span>Helsinki, Finland</span>
+                    </span>
+                    <button id="themeToggle" class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="Toggle Theme">
+                        <i data-lucide="moon" id="themeIcon" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Bar -->
+            <nav class="flex space-x-2 sm:space-x-4 border-b border-slate-200 dark:border-slate-700 mt-6 overflow-x-auto scrollbar-none" id="tabNav">
+                <button onclick="switchTab('about')" id="tab-about" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-brand-600 text-brand-600 dark:text-brand-500 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4"></i> Overview
+                </button>
+                <button onclick="switchTab('experience')" id="tab-experience" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-700 dark:hover:text-slate-200 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
+                </button>
+                <button onclick="switchTab('skills')" id="tab-skills" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-700 dark:hover:text-slate-200 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-4 h-4"></i> Skills & Tools
+                </button>
+                <button onclick="switchTab('education')" id="tab-education" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-700 dark:hover:text-slate-200 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> Education & Honors
+                </button>
+                <button onclick="switchTab('publications')" id="tab-publications" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-slate-700 dark:hover:text-slate-200 whitespace-nowrap flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Publications
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- TAB 1: OVERVIEW -->
+        <section id="about" class="tab-content active space-y-6">
+            <!-- Key Metrics Header -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center shadow-sm">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-brand-600 dark:text-brand-500">12+ Years</p>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Industry Experience</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center shadow-sm">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-brand-600 dark:text-brand-500">$89M+</p>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">VC Funding Raised</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center shadow-sm">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-brand-600 dark:text-brand-500">+38%</p>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Conversion Uplift</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center shadow-sm">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-brand-600 dark:text-brand-500">470+</p>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Global Clients Served</p>
+                </div>
+            </div>
+
+            <!-- Professional Summary Card -->
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <h2 class="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                    <i data-lucide="user-check" class="text-brand-600"></i> Professional Summary
+                </h2>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+                    Versatile results-driven <strong>Senior Graphic Designer, Brand Identity & UI/UX Specialist</strong> with 12+ years of experience transforming complex business metrics into high-converting visual ecosystems, investor pitch decks ($89M+ VC funding raised), and responsive digital products. Expert in data-driven UI/UX execution, leveraging A/B testing, CRO, and accessible design system architecture (Figma, Adobe CC, HTML5/CSS3/JS) to boost web conversions by +38% and campaign engagement by +140%.
+                </p>
+            </div>
+
+            <!-- Core Strengths Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <h3 class="font-bold text-lg flex items-center gap-2 text-slate-900 dark:text-white">
+                        <i data-lucide="layers" class="text-brand-600"></i> UI/UX & Design Systems
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
+                        Specialized in Figma tokens, atomic design architecture, WCAG 2.1 AA accessibility compliance, wireframing, high-fidelity interactive prototyping, and seamless developer handoff.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <h3 class="font-bold text-lg flex items-center gap-2 text-slate-900 dark:text-white">
+                        <i data-lucide="trending-up" class="text-brand-600"></i> Pitch Decks & Branding
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
+                        Crafting high-stakes Series A/Seed decks, executive keynotes, financial data visualizations, and complete corporate rebrands across FinTech, HealthTech, SaaS, and AI sectors.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: EXPERIENCE -->
+        <section id="experience" class="tab-content space-y-6">
+            <div class="space-y-6">
+                
+                <!-- Role 1 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-100 dark:border-slate-700 pb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Lead Brand & UI/UX Designer / Freelance Consultant</h3>
+                            <p class="text-brand-600 dark:text-brand-500 font-medium text-sm">Upwork (100% Client Satisfaction & Top Rated Global Freelancer)</p>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 w-fit">
+                            Oct 2014 – Aug 2026
+                        </span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                        <li>Architected end-to-end visual identity systems, corporate rebrands, and investor presentation materials for 320+ national and 150+ international clients across Europe, UK, Australia, Canada, and USA.</li>
+                        <li>Designed and optimized high-stakes Series A and Seed investor pitch decks that directly secured over <strong>$89M+ in equity funding</strong> for tech startups in FinTech, Health Tech, SaaS, and AI sectors.</li>
+                        <li>Executed 40+ iterative A/B tests on landing page layouts, primary CTA placements, and hero section visual hierarchies, yielding an average <strong>+38% uplift</strong> in user signup conversion rates.</li>
+                        <li>Developed comprehensive, scalable Figma design systems featuring tokenized typography, dynamic auto-layout components, and strict WCAG 2.1 AA compliance, accelerating developer implementation speeds by 45%.</li>
+                        <li>Conceptualized digital marketing assets and print exhibition collateral that boosted brand engagement metrics by up to <strong>140%</strong>.</li>
+                        <li>Translated complex visual wireframes into crisp, production-ready HTML5/CSS3/JavaScript codebases.</li>
+                    </ul>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-100 dark:border-slate-700 pb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Visual Designer & Application Developer</h3>
+                            <p class="text-brand-600 dark:text-brand-500 font-medium text-sm">xTechnos</p>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 w-fit">
+                            Jun 2011 – Dec 2014
+                        </span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                        <li>Spearheaded visual design, layout optimization, and interactive user flows for desktop and web applications.</li>
+                        <li>Partnered directly with backend engineering teams to build, test, and deploy integrated web modules (HTML5/CSS3/JavaScript).</li>
+                        <li>Engineered reusable component libraries, standardized icon systems, and modular UI kits from scratch, accelerating build times.</li>
+                        <li>Developed unified corporate branding identities and technical marketing collateral for enterprise software launches.</li>
+                    </ul>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-100 dark:border-slate-700 pb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Computer Science Educator & Workshop Lead (IT & Technical)</h3>
+                            <p class="text-brand-600 dark:text-brand-500 font-medium text-sm">School Education Department, Govt. of Punjab</p>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 w-fit">
+                            Apr 2014 – Aug 2026
+                        </span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                        <li>Instructed 1,200+ students and educational professionals in digital design principles, graphic layout theory, typography hierarchy, and UI fundamentals.</li>
+                        <li>Spearheaded design thinking and web development workshops focusing on responsive CSS grids, HTML structure, UI logic, and Adobe Creative Suite.</li>
+                        <li>Mentored emerging designers in portfolio development, user experience evaluation, accessibility standards, and modern industry workflows.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 3: SKILLS & TOOLS -->
+        <section id="skills" class="tab-content space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Category 1 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="palette" class="text-brand-600"></i> Brand & Visual Identity
+                    </h3>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Brand Systems</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Style Guides & Governance</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Typography Systems</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Logo Design</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Marketing Collateral</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Packaging & Print</span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="presentation" class="text-brand-600"></i> Presentation & Pitch Design
+                    </h3>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Investor Pitch Decks</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Executive Keynotes</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Data Visualization</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Storyboarding</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Charts</span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="layout" class="text-brand-600"></i> UI/UX & Design Systems
+                    </h3>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">A/B Testing</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CRO Optimization</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Wireframing</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Prototyping</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Figma Tokens</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">WCAG 2.1 AA</span>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="code" class="text-brand-600"></i> Software & Technical Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Figma</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Adobe Creative Cloud</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Photoshop / Illustrator</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">HTML5 / CSS3 / JS</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Git</span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Python</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Languages Card -->
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="globe" class="text-brand-600"></i> Languages
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                        <p class="font-bold text-sm text-slate-900 dark:text-white">English</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Full Professional (C1)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                        <p class="font-bold text-sm text-slate-900 dark:text-white">Finnish</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Learner</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                        <p class="font-bold text-sm text-slate-900 dark:text-white">Urdu / Punjabi</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Native</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                        <p class="font-bold text-sm text-slate-900 dark:text-white">Hindi</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Good</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: EDUCATION & HONORS -->
+        <section id="education" class="tab-content space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Academic Qualifications -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="graduation-cap" class="text-brand-600"></i> Academic Qualifications
+                    </h3>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-1">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-slate-900 dark:text-white">Master of Science in Computer Science (MSCS)</h4>
+                            <span class="text-xs text-slate-500">2017 – 2020</span>
+                        </div>
+                        <p class="text-sm text-brand-600 dark:text-brand-500">The University of Lahore, Pakistan</p>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-1">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-slate-900 dark:text-white">BS (Hons.) in Computer Science</h4>
+                            <span class="text-xs text-slate-500">2009 – 2014</span>
+                        </div>
+                        <p class="text-sm text-brand-600 dark:text-brand-500">University of Gujrat, Pakistan</p>
+                    </div>
+                </div>
+
+                <!-- Honors & Awards -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="award" class="text-brand-600"></i> Honors & Scholarships
+                    </h3>
+
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-slate-900 dark:text-white">Doctor of Philosophy (PhD) in Computer Science</h4>
+                            <span class="text-xs text-slate-500">Feb 2023</span>
+                        </div>
+                        <p class="text-sm text-brand-600 dark:text-brand-500">Griffith University, Nathan Campus, Brisbane, Australia</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+                            Awarded the prestigious fully funded <em>Griffith University Postgraduate Research Scholarship (GUPRS)</em> and <em>International Postgraduate Research Scholarship (GUIPRS)</em> for doctoral research.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: PUBLICATIONS -->
+        <section id="publications" class="tab-content space-y-6">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+                
+                <!-- Journals -->
+                <div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-100 dark:border-slate-700 pb-3 mb-4">
+                        <i data-lucide="file-text" class="text-brand-600"></i> Journal Publications
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
+                            <div>
+                                <p class="font-medium text-slate-900 dark:text-white text-sm">Predicting the Future Transaction from Large and Imbalanced Banking Dataset</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">IJACSA (2020)</p>
+                            </div>
+                            <a href="https://doi.org/10.14569/IJACSA.2020.0110134" target="_blank" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium w-fit">
+                                View DOI <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
+                            <div>
+                                <p class="font-medium text-slate-900 dark:text-white text-sm">Classification of Non-Discriminant ERD/ERS Comprising Motor Imagery Electroencephalography Signals With Novel REP-based Approach</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">IJACSA (2020)</p>
+                            </div>
+                            <a href="https://doi.org/10.14569/IJACSA.2020.0110146" target="_blank" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium w-fit">
+                                View DOI <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
+                            <div>
+                                <p class="font-medium text-slate-900 dark:text-white text-sm">Casual Impact Analysis on Android Market</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">IJACSA (2019)</p>
+                            </div>
+                            <a href="https://doi.org/10.14569/IJACSA.2019.0100644" target="_blank" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium w-fit">
+                                View DOI <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapters & Conferences -->
+                <div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-100 dark:border-slate-700 pb-3 mb-4">
+                        <i data-lucide="book" class="text-brand-600"></i> Book Chapters & Conferences
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
+                            <div>
+                                <p class="font-medium text-slate-900 dark:text-white text-sm">Ensemble Usage for Classification of EEG Signals: A Review with Comparison</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">HCII 2020, Springer</p>
+                            </div>
+                            <a href="https://doi.org/10.1007/978-3-030-50353-6_14" target="_blank" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium w-fit">
+                                View DOI <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
+                            <div>
+                                <p class="font-medium text-slate-900 dark:text-white text-sm">From Cloud Computing to FOG Computing in Healthcare Big Data</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">MATEC Web of Conferences 189 (2018)</p>
+                            </div>
+                            <a href="https://doi.org/10.1051/matecconf/201818903011" target="_blank" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium w-fit">
+                                View DOI <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 mt-auto text-center text-xs text-slate-500 dark:text-slate-400">
+        <p>© <span id="year"></span> Sadaf Ilyas. All rights reserved.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Reset button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-600', 'text-brand-600', 'dark:text-brand-500', 'font-semibold');
+                btn.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400', 'font-medium');
+            });
+
+            // Activate selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Style selected button
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400', 'font-medium');
+            activeBtn.classList.add('border-brand-600', 'text-brand-600', 'dark:text-brand-500', 'font-semibold');
+        }
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+            lucide.createIcons();
+        });
+
+        // Dynamic Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Render Icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
